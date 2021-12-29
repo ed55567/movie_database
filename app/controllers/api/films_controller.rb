@@ -1,18 +1,18 @@
 class Api::FilmsController < ApplicationController
+  before_action :movie_api, only: [:index, :show]
+
   def index
-    @films = faraday_response
-    render json: faraday_response.body
+    render json: @movie_api.search(params.require(:movietitle))
   end 
+  
+  def show
+    render json: @movie_api.details(params.require(:movie_id))
+  end
 
-  def faraday_response
-    Faraday.get("https://api.themoviedb.org/3/movie/550?api_key=#{api_key}")
-  end 
+  private
 
-  def api_key
-    Rails.application.credentials.films_api[:api_key]
+  def movie_api
+    @movie_api = MovieDatabaseApi.new
   end
 end
-
-
-
 

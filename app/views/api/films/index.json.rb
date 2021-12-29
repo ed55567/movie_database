@@ -1,3 +1,7 @@
-json.array!(@films) do |film|
+#json.array!(@films) do |film|
 
-  json.
+# #@films.map do |film|
+#   {
+#    id: film.id
+#   }
+# end
